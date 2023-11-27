@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import loja.model.MovelCadeira;
+import loja.model.MovelMesa;
 import loja.util.Cores;
 
 public class Menu {
@@ -11,7 +13,13 @@ public class Menu {
 	static Scanner leia = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
+		
+		MovelCadeira cadeira1 = new MovelCadeira(12, "Java Cadeira de Jantar, Azul", 300.00f, 180.00f, 1, 46.0f);
+		cadeira1.visualizar();
+		
+		MovelMesa mesa1 = new MovelMesa(41, "Gen Mesa de Centro, Verde", 175.90f, 100.00f, 2, 1);
+		mesa1.visualizar();
+		
 		while (true) {
 
 			int opcao;
