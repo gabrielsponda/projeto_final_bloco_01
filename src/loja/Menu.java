@@ -14,6 +14,7 @@ public class Menu {
 
 	public static void main(String[] args) {
 		
+		// Testes
 		MovelCadeira cadeira1 = new MovelCadeira(12, "Java Cadeira de Jantar, Azul", 300.00f, 180.00f, 1, 46.0f);
 		cadeira1.visualizar();
 		
