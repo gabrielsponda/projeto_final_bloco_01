@@ -10,14 +10,16 @@ public abstract class Movel {
 	private float preco;
 	private float custo;
 	private int categoria;
+	private int estoque;
 
-	public Movel(int codigo, String nome, float preco, float custo, int categoria) {
+	public Movel(int codigo, String nome, float preco, float custo, int categoria, int quantidade) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.preco = preco;
 		this.custo = custo;
 		this.categoria = categoria;
+		this.estoque = quantidade;
 	}
 
 	public int getCodigo() {
@@ -59,6 +61,14 @@ public abstract class Movel {
 	public void setCategoria(int categoria) {
 		this.categoria = categoria;
 	}
+	
+	public int getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(int quantidade) {
+		this.estoque = quantidade;
+	}
 
 	// Método auxiliar
 	public void visualizar() {
@@ -81,6 +91,7 @@ public abstract class Movel {
 		System.out.printf("| Preço: %-30.2f|\n", this.getPreco());
 		System.out.printf("| Custo: %-30.2f|\n", this.getCusto());
 		System.out.printf("| Tipo: %-31s|\n", categoria);
+		System.out.printf("| Estoque: %-28s|\n", this.getEstoque());
 	}
 
 }

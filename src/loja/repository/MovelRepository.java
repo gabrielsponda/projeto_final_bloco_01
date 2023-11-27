@@ -15,4 +15,9 @@ public interface MovelRepository {
 
 	public void deletar(int codigo);
 	
+	// Métodos logísticos
+	public void vender(int codigo, int quantidade);
+	
+	public void comprar(int codigo, int quantidade);
+	
 }

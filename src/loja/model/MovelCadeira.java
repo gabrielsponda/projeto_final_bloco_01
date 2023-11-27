@@ -4,8 +4,8 @@ public class MovelCadeira extends Movel {
 
 		private float alturaAssento;
 		
-		public MovelCadeira(int codigo, String nome, float preco, float custo, int categoria, float alturaAssento) {
-			super(codigo, nome, preco, custo, categoria);
+		public MovelCadeira(int codigo, String nome, float preco, float custo, int categoria, float alturaAssento, int quantidade) {
+			super(codigo, nome, preco, custo, categoria, quantidade);
 			this.alturaAssento = alturaAssento;
 		}
 

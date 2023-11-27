@@ -42,7 +42,6 @@ public class MovelController implements MovelRepository {
 
 	@Override
 	public void procurarPorCodigo(int codigo) {
-
 		Optional<Movel> movel = buscarNaCollection(codigo);
 
 		if (movel.isPresent()) {
@@ -104,6 +103,59 @@ public class MovelController implements MovelRepository {
 			System.out.println("└──────────────────────────────────────┘");
 		}
 	}
+	
+	@Override
+	public void vender(int codigo, int quantidade) {
+		Optional<Movel> movel = buscarNaCollection(codigo);
+		
+		if (movel.isPresent()) {
+			if (movel.get().getEstoque() < quantidade) {
+				System.out.println(Cores.TEXT_RESET);
+				System.out.println("----------------------------------------");
+				System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_RED_BACKGROUND_BRIGHT);
+				System.out.println("┌──────────────────────────────────────┐");
+				System.out.println("|        PRODUTO SEM ESTOQUE!          |");
+				System.out.println("└──────────────────────────────────────┘");
+			} else {
+				System.out.println(Cores.TEXT_RESET);
+				System.out.println("----------------------------------------");
+				System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_GREEN_BACKGROUND_BRIGHT);
+				System.out.println("┌──────────────────────────────────────┐");
+				System.out.printf("|%02d UNIDADES DO PRODUTO %02d COMPRADOS!|\n", quantidade, codigo);
+				System.out.println("└──────────────────────────────────────┘");
+				movel.get().setEstoque(movel.get().getEstoque() + quantidade);
+			}
+		} else {
+			System.out.println(Cores.TEXT_RESET);
+			System.out.println("----------------------------------------");
+			System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_RED_BACKGROUND_BRIGHT);
+			System.out.println("┌──────────────────────────────────────┐");
+			System.out.println("|       PRODUTO NÃO ENCONTRADO!        |");
+			System.out.println("└──────────────────────────────────────┘");
+		}
+	}
+
+	@Override
+	public void comprar(int codigo, int quantidade) {
+		Optional<Movel> movel = buscarNaCollection(codigo);
+		
+		if (movel.isPresent()) {
+			System.out.println(Cores.TEXT_RESET);
+			System.out.println("----------------------------------------");
+			System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_GREEN_BACKGROUND_BRIGHT);
+			System.out.println("┌──────────────────────────────────────┐");
+			System.out.printf("|%02d UNIDADES DO PRODUTO %02d COMPRADOS!|\n", quantidade, codigo);
+			System.out.println("└──────────────────────────────────────┘");
+			movel.get().setEstoque(movel.get().getEstoque() + quantidade);
+		} else {
+			System.out.println(Cores.TEXT_RESET);
+			System.out.println("----------------------------------------");
+			System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_RED_BACKGROUND_BRIGHT);
+			System.out.println("┌──────────────────────────────────────┐");
+			System.out.println("|       PRODUTO NÃO ENCONTRADO!        |");
+			System.out.println("└──────────────────────────────────────┘");
+		}
+	}
 
 	// Métodos auxiliares
 	public Optional<Movel> buscarNaCollection(int codigo) {
@@ -113,5 +165,6 @@ public class MovelController implements MovelRepository {
 		}
 		return Optional.empty();
 	}
+
 
 }

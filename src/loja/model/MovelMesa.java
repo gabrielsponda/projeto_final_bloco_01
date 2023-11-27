@@ -4,8 +4,8 @@ public class MovelMesa extends Movel {
 
 	private int formatoTampo;
 
-	public MovelMesa(int codigo, String nome, float preco, float custo, int categoria, int formatoTampo) {
-		super(codigo, nome, preco, custo, categoria);
+	public MovelMesa(int codigo, String nome, float preco, float custo, int categoria, int formatoTampo, int quantidade) {
+		super(codigo, nome, preco, custo, categoria, quantidade);
 		this.formatoTampo = formatoTampo;
 	}
 

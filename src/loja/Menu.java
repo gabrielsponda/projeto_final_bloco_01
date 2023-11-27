@@ -19,7 +19,7 @@ public class Menu {
 		
 		MovelController moveis = new MovelController();
 
-		int opcao, codigo, categoria;
+		int opcao, codigo, categoria, estoque, quantidade;
 		String nome;
 		float preco, custo;
 		
@@ -40,6 +40,8 @@ public class Menu {
 			System.out.println("|  3 - Buscar Produto por Código       |");
 			System.out.println("|  4 - Atualizar Dados do Produto      |");
 			System.out.println("|  5 - Apagar Produto                  |");
+			System.out.println("|  6 - Vender Produto                  |");
+			System.out.println("|  7 - Comprar Produto                 |");
 			System.out.println("|  0 - Sair                            |");
 			System.out.println("|                                      |");
 			System.out.println("└──────────────────────────────────────┘");
@@ -85,19 +87,22 @@ public class Menu {
 				
 				System.out.print("\n→ Para a categoria, digite 1 para cadeira ou 2 para mesa: ");
 				categoria = leia.nextInt();
+				
+				System.out.print("\n→ Digite a quantidade de itens em estoque do produto: ");
+				estoque = leia.nextInt();
 
 				switch (categoria) {
 				
 				case 1 -> {
 					System.out.print("\n→ Digite a altura do assento: ");
 					float alturaAssento = leia.nextFloat();
-					moveis.cadastrar(new MovelCadeira(codigo, nome, preco, custo, categoria, alturaAssento));
+					moveis.cadastrar(new MovelCadeira(codigo, nome, preco, custo, categoria, alturaAssento, estoque));
 				}
 				
 				case 2 -> {
 					System.out.println("\n→ Para o formato do tampo, digite 1 para redondo, 2 para quadrado e 3 para retangular: ");
 					int formatoTampo = leia.nextInt();
-					moveis.cadastrar(new MovelMesa(codigo, nome, preco, custo, categoria, formatoTampo));
+					moveis.cadastrar(new MovelMesa(codigo, nome, preco, custo, categoria, formatoTampo, estoque));
 				}
 				
 				default -> throw new IllegalArgumentException("Categoria inválida!");
@@ -177,6 +182,9 @@ public class Menu {
 					System.out.print("\n→ Digite o custo de aquisição do produto: ");
 					custo = leia.nextFloat();
 					
+					System.out.print("\n→ Digite a quantidade de itens em estoque do produto: ");
+					estoque = leia.nextInt();
+					
 					categoria = movel.get().getCategoria();
 					
 					switch (categoria) {
@@ -184,13 +192,13 @@ public class Menu {
 					case 1 -> {
 						System.out.print("\n→ Digite a altura do assento: ");
 						float alturaAssento = leia.nextFloat();
-						moveis.atualizar(new MovelCadeira(codigo, nome, preco, custo, categoria, alturaAssento));
+						moveis.atualizar(new MovelCadeira(codigo, nome, preco, custo, categoria, alturaAssento, estoque));
 					}
 					
 					case 2 -> {
 						System.out.println("\n→ Para o formato do tampo, digite 1 para redondo, 2 para quadrado e 3 para retangular: ");
 						int formatoTampo = leia.nextInt();
-						moveis.atualizar(new MovelMesa(codigo, nome, preco, custo, categoria, formatoTampo));
+						moveis.atualizar(new MovelMesa(codigo, nome, preco, custo, categoria, formatoTampo, estoque));
 					}
 					
 					default -> throw new IllegalArgumentException("Categoria inválida!");
@@ -208,9 +216,9 @@ public class Menu {
 
 				keyPress();
 				break;
-
+				
 			case 5:
-
+				
 				System.out.println(Cores.TEXT_RESET);
 				System.out.println("========================================");
 				System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_BLUE_BACKGROUND);
@@ -223,6 +231,50 @@ public class Menu {
 				System.out.print("\n→ Digite o código do produto: ");
 				codigo = leia.nextInt();
 				moveis.deletar(codigo);
+				
+				keyPress();
+				break;
+
+			case 6:
+
+				System.out.println(Cores.TEXT_RESET);
+				System.out.println("========================================");
+				System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_BLUE_BACKGROUND);
+				System.out.println("┌──────────────────────────────────────┐");
+				System.out.println("|            VENDER PRODUTO            |");
+				System.out.println("├──────────────────────────────────────┤" + Cores.TEXT_BLACK + Cores.ANSI_WHITE_BACKGROUND);
+				System.out.println("| Informe o código do produto.         |");
+				System.out.println("└──────────────────────────────────────┘");
+				
+				System.out.print("\n→ Digite o código do produto: ");
+				codigo = leia.nextInt();
+				
+				System.out.print("\n→ Digite a quantidade a ser vendida: ");
+				quantidade = leia.nextInt();
+				
+				moveis.vender(codigo, quantidade);
+				
+				keyPress();
+				break;
+				
+			case 7:
+				
+				System.out.println(Cores.TEXT_RESET);
+				System.out.println("========================================");
+				System.out.println(Cores.TEXT_WHITE_BOLD_BRIGHT + Cores.ANSI_BLUE_BACKGROUND);
+				System.out.println("┌──────────────────────────────────────┐");
+				System.out.println("|           COMPRAR PRODUTO            |");
+				System.out.println("├──────────────────────────────────────┤" + Cores.TEXT_BLACK + Cores.ANSI_WHITE_BACKGROUND);
+				System.out.println("| Informe o código do produto.         |");
+				System.out.println("└──────────────────────────────────────┘");
+				
+				System.out.print("\n→ Digite o código do produto: ");
+				codigo = leia.nextInt();
+				
+				System.out.print("\n→ Digite a quantidade a ser comprada: ");
+				quantidade = leia.nextInt();
+				
+				moveis.comprar(codigo, quantidade);
 				
 				keyPress();
 				break;
